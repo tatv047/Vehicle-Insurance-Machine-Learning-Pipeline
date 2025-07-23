@@ -209,4 +209,5 @@ __marimo__/
 
 # my additions
 notes/
-cloud_credentials/
+credentials/
+logs/
