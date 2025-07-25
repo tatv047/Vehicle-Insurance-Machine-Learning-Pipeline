@@ -34,5 +34,5 @@ num_features:
   - Age
   - Vintage
 
-mm_columns:
+mm_features:
   - Annual_Premium
