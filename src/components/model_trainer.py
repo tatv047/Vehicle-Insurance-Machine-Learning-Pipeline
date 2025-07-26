@@ -1,5 +1,7 @@
 import sys
 from typing import Tuple
+import json
+from dataclasses import asdict
 
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
@@ -60,7 +62,13 @@ class ModelTrainer:
             recall = recall_score(y_test, y_pred)
 
             # Creating metric artifact
-            metric_artifact = ClassificationMetricArtifact(f1_score=f1, precision_score=precision, recall_score=recall)
+            metric_artifact = ClassificationMetricArtifact(
+                accuracy_score= accuracy,
+                f1_score=f1,
+                precision_score=precision,
+                recall_score=recall
+                )
+            
             return model, metric_artifact
         
         except Exception as e:
@@ -92,7 +100,7 @@ class ModelTrainer:
             logging.info("Preprocessing obj loaded.")
 
             # Check if the model's accuracy meets the expected threshold
-            if accuracy_score(train_arr[:, -1], trained_model.predict(train_arr[:, :-1])) < self.model_trainer_config.expected_accuracy:
+            if metric_artifact.accuracy_score < self.model_trainer_config.expected_accuracy:
                 logging.info("No model found with score above the base score")
                 raise Exception("No model found with score above the base score")
 
@@ -102,10 +110,17 @@ class ModelTrainer:
             save_object(self.model_trainer_config.trained_model_file_path, my_model)
             logging.info("Saved final model object that includes both preprocessing and the trained model")
 
-            # Create and return the ModelTrainerArtifact
+            # Save metric artifact as JSON in the same artifact folder
+            metric_file_path = self.model_trainer_config.metric_file_path
+            with open(metric_file_path, "w") as f:
+                json.dump(asdict(metric_artifact), f, indent=4)
+            logging.info(f"Saved metrics to {metric_file_path}")
+
+            # Create, return and the ModelTrainerArtifact
             model_trainer_artifact = ModelTrainerArtifact(
                 trained_model_file_path=self.model_trainer_config.trained_model_file_path,
                 metric_artifact=metric_artifact,
+                metric_file_path = metric_file_path
             )
             logging.info(f"Model trainer artifact: {model_trainer_artifact}")
             return model_trainer_artifact
