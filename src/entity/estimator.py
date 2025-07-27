@@ -1,6 +1,7 @@
 import sys
 
 import pandas as pd
+import numpy as np
 from pandas import DataFrame
 from sklearn.pipeline import Pipeline
 
@@ -26,7 +27,7 @@ class MyModel:
         self.preprocessing_object = preprocessing_object
         self.trained_model_object = trained_model_object
 
-    def predict(self, dataframe: pd.DataFrame) -> DataFrame:
+    def predict(self, dataframe: pd.DataFrame) -> np.ndarray:
         """
         Function accepts preprocessed inputs (with all custom transformations already applied),
         applies scaling using preprocessing_object, and performs prediction on transformed features.

@@ -53,7 +53,6 @@ DATA_TRANSFORMATION_TRANSFORMED_OBJECT_DIR: str = "transformed_object"
 MODEL TRAINER related constant start with MODEL_TRAINER var name
 """
 MODEL_TRAINER_DIR_NAME: str = "model_trainer"
-# MODEL_TRAINER_TRAINED_MODEL_DIR: str = "trained_model"
 # MODEL_TRAINER_METRIC_NAME: str = "metric.json"
 # MODEL_TRAINER_TRAINED_MODEL_NAME: str = "model.pkl"
 MODEL_TRAINER_EXPECTED_SCORE: float = 0.6
@@ -69,7 +68,8 @@ MIN_SAMPLES_SPLIT_RANDOM_STATE: int = 101
 MODEL Evaluation related constants
 """
 MODEL_EVALUATION_CHANGED_THRESHOLD_SCORE: float = 0.02
-MODEL_BUCKET_NAME = "<aws_user_id>-my-model-mlops-proj"
+# MODEL_BUCKET_NAME = "<aws_user_id>-my-model-mlops-proj"
+MODEL_BUCKET_NAME = os.getenv("AWS_USER_ID") + "-my-model-mlops-proj"
 MODEL_PUSHER_S3_KEY = "model-registry"
 
 

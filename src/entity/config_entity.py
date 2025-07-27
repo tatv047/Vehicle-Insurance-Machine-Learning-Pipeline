@@ -63,3 +63,9 @@ class ModelPusherConfig:
     bucket_name: str = MODEL_BUCKET_NAME
     s3_model_key_path: str = MODEL_FILE_NAME
     s3_metric_key_path:str = METRIC_FILE_NAME
+
+@dataclass
+class VehiclePredictorConfig:
+    model_file_path: str = MODEL_FILE_NAME
+    model_bucket_name: str = MODEL_BUCKET_NAME
+    metric_file_path:str = METRIC_FILE_NAME
