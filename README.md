@@ -135,12 +135,6 @@ Welcome to this MLOps project, designed to demonstrate a robust pipeline for man
 
 ---
 
-## 🛠️ Additional Resources
-- **Crash Course on setup.py and pyproject.toml**: See `crashcourse.txt` for details.
-- **GitHub Secrets**: Manage secrets for secure CI/CD pipelines.
-
----
-
 ## 🎯 Project Workflow Summary
 
 1. **Data Ingestion** ➔ **Data Validation** ➔ **Data Transformation**
